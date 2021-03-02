@@ -1,4 +1,6 @@
 class Api::V1::CoursesController < Api::BaseController
+  before_action :is_authorized?
+
   def index
     run_interaction Courses::Index, each_serializer: CourseSerializer
   end
@@ -11,7 +13,7 @@ class Api::V1::CoursesController < Api::BaseController
     run_interaction Courses::Update, serializer: CourseSerializer
   end
 
-  def show 
+  def show
     run_interaction Courses::Show, serializer: CourseSerializer
   end
 

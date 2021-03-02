@@ -1,0 +1,38 @@
+[
+  {
+    "Id": 1,
+    "Name": "Booty & Abs",
+    "Verticals": 1,
+    "State": "active"
+  },
+  {
+    "Id": 2,
+    "Name": "Full Body",
+    "Verticals": 1,
+    "State": "active"
+  },
+  {
+    "Id": 3,
+    "Name": "Advertising",
+    "Verticals": 2,
+    "State": "active"
+  },
+  {
+    "Id": 4,
+    "Name": "Writing",
+    "Verticals": 2,
+    "State": "active"
+  },  
+  {
+    "Id": 5,
+    "Name": "Singing",
+    "Verticals": 3,
+    "State": "active"
+  },
+  {
+    "Id": 6,
+    "Name": "Music Fundamentals",
+    "Verticals": 3,
+    "State": "active"
+  }
+]

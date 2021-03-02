@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  mount_opro_oauth
+  devise_for :users
+
   namespace :api do
     namespace :v1 do
       resources :verticals,  except: %i[new edit]
@@ -6,4 +9,5 @@ Rails.application.routes.draw do
       resources :courses,    except: %i[new edit]
     end
   end
+  root to: proc { [200, {}, ['']] }
 end

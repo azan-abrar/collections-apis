@@ -16,6 +16,8 @@ gem 'active_interaction', '~> 4.0'
 gem 'active_model_serializers', '~> 0.10.12'
 gem 'elasticsearch-model', '~> 7.0.0'
 gem 'elasticsearch-rails', '~> 7.0.0'
+gem 'devise'
+gem 'opro', git: 'https://github.com/azan-abrar/opro.git'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -1,4 +1,6 @@
 class Api::V1::CategoriesController < Api::BaseController
+  before_action :is_authorized?
+
   def index
     run_interaction Categories::Index, each_serializer: CategorySerializer
   end
@@ -11,7 +13,7 @@ class Api::V1::CategoriesController < Api::BaseController
     run_interaction Categories::Update, serializer: CategorySerializer
   end
 
-  def show 
+  def show
     run_interaction Categories::Show, serializer: CategorySerializer
   end
 

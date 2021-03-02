@@ -1,4 +1,6 @@
 class Api::V1::VerticalsController < Api::BaseController
+  before_action :is_authorized?
+
   def index
     run_interaction Verticals::Index, each_serializer: VerticalSerializer
   end

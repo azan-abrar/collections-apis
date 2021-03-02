@@ -7,6 +7,7 @@ class Course < ApplicationRecord
 
   # Validations #
   validates :name, :author, :state, presence: true
+  validates :name, uniqueness: { scope: [:category_id, :author] }
 
   # Enums #
   enum state: %i[active inactive]
