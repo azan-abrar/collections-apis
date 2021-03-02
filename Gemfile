@@ -12,6 +12,10 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'active_interaction', '~> 4.0'
+gem 'active_model_serializers', '~> 0.10.12'
+gem 'elasticsearch-model', '~> 7.0.0'
+gem 'elasticsearch-rails', '~> 7.0.0'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -1,25 +1,17 @@
-# README
+# INSTRUCTIONS
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Dependencies
+- Ruby          v2.6.6
+- Rails         v5.2.3
+- Postgres      v12.6
+- ElasticSearch v7.10.2
 
-Things you may want to cover:
+* Setup
+- Clone the project.
+- Copy database.example.yml to build your database.yml.
+- Run command `rvm use 2.6.6`
+- Run command `bundle install`
+- Run command `rake db:create db:migrate`
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# collections-apis
+* APIs
+- Check `app/controllers/api` to see available API endpoints.
