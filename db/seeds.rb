@@ -6,37 +6,42 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-#Seeding Verticals from JSON
-puts "### Started seeding Verticals"
-verticals_json_records = JSON.parse(File.read(Rails.root.join('lib', 'seeds', 'verticals.json')))
-verticals_json_records.each do |vertical|
-  Vertical.find_or_create_by!(name: vertical["Name"])
-  puts "Seeded Vertical: #{vertical["Name"]}"
-end
-
-#Seeding Categories from JSON
-puts "### Started seeding Categories"
+###SEEDING USING ACTIVE INTERACTIONS
+puts "### SEEDING USING ACTIVE INTERACTIONS"
+verticals_json_records  = JSON.parse(File.read(Rails.root.join('lib', 'seeds', 'verticals.json')))
 categories_json_records = JSON.parse(File.read(Rails.root.join('lib', 'seeds', 'categories.json')))
-categories_json_records.each do |raw_category|
-  Category.find_or_create_by!(name: raw_category["Name"]) do |category|
-    category.vertical_id = Vertical.find_by(id: raw_category["Verticals"])&.id
-    category.state = Category.states[raw_category["State"]]
-  end
-  puts "Seeded Vertical: #{raw_category["Name"]}"
-end
+courses_json_records    = JSON.parse(File.read(Rails.root.join('lib', 'seeds', 'courses.json')))
+verticals_json_records.each do |vertical|
+  vertical_params = ActionController::Parameters.new({
+    vertical: {
+      name: vertical['Name'],
+      categories_attributes: []
+    }
+  })
+  puts "Seeded Vertical: #{vertical['Name']}"
 
-#Seeding Courses from JSON
-puts "### Started seeding Courses"
-courses_json_records = JSON.parse(File.read(Rails.root.join('lib', 'seeds', 'courses.json')))
-courses_json_records.each do |raw_course|
-  Course.find_or_create_by!(
-    name: raw_course["Name"],
-    author: raw_course["Author"],
-    category_id:  Category.find_by(id: raw_course["Categories"])&.id
-    ) do |course|
-    course.state = Course.states[raw_course["State"]]
+  categories_json_records.each do |category|
+    if category['Verticals'] == vertical['Id']
+      vertical_params['vertical']['categories_attributes'] << {
+        name:  category['Name'],
+        state: category['State'],
+        courses_attributes: []
+      }
+      puts "Seeded Vertical: #{category['Name']}"
+
+      courses_json_records.each do |course|
+        if course['Categories'] == category['Id']
+          vertical_params['vertical']['categories_attributes'].last['courses_attributes'] << {
+            name:   course['Name'],
+            state:  course['State'],
+            author: course['Author']
+          }
+          puts "Seeded Vertical: #{course['Name']}"
+        end
+      end
+    end
   end
-  puts "Seeded Vertical: #{raw_course["Name"]}"
+  Verticals::Create.run(params: vertical_params)
 end
 
 #Seeding Dummy User
